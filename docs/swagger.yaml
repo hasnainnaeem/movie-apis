@@ -1,0 +1,201 @@
+basePath: /
+definitions:
+  main.Character:
+    properties:
+      birth_year:
+        type: string
+      gender:
+        type: string
+      hair_color:
+        type: string
+      height:
+        type: string
+      height_in_feet:
+        type: string
+      name:
+        type: string
+    type: object
+  main.Comment:
+    properties:
+      content:
+        type: string
+      ip:
+        type: string
+      movie_id:
+        type: string
+      timestamp:
+        type: string
+    type: object
+  main.Film:
+    properties:
+      episode_id:
+        type: integer
+      opening_crawl:
+        type: string
+      release_date:
+        type: string
+      title:
+        type: string
+      total_comments:
+        type: integer
+    type: object
+  main.errorResponse:
+    properties:
+      error_code:
+        type: integer
+      message:
+        type: string
+    type: object
+  main.getCharactersResponse:
+    properties:
+      characters:
+        items:
+          $ref: '#/definitions/main.Character'
+        type: array
+      count:
+        type: integer
+      height:
+        type: string
+      height_in_feet:
+        type: string
+    type: object
+  main.getCommentsResponse:
+    properties:
+      comments:
+        items:
+          $ref: '#/definitions/main.Comment'
+        type: array
+      count:
+        type: integer
+    type: object
+  main.getFilmsResponse:
+    properties:
+      count:
+        type: integer
+      results:
+        items:
+          $ref: '#/definitions/main.Film'
+        type: array
+    type: object
+  main.postCommentRequest:
+    properties:
+      comment:
+        type: string
+      movie_id:
+        type: integer
+    type: object
+info:
+  contact:
+    name: Hasnain Naeem
+  description: API to get details of movies and to comment on them.
+  title: APIs for Movie Details
+  version: "1.0"
+paths:
+  /api/characters/{movie_id}:
+    get:
+      consumes:
+      - application/json
+      description: Fetch characters of a movie specified by ID along with their combined
+        height.
+      parameters:
+      - description: Movie ID
+        in: path
+        name: movie_id
+        required: true
+        type: integer
+      - description: 'Supported values: ''name'', ''gender'', or ''height'', use ''-''
+          prefix for descending order.'
+        in: query
+        name: sort
+        type: string
+      - description: Filter by gender
+        in: query
+        name: filter
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.getCharactersResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.errorResponse'
+      summary: Fetch movie characters.
+      tags:
+      - Character
+  /api/comment/:
+    post:
+      consumes:
+      - application/json
+      description: Submit comment for a movie identified by 'movie_id' in request
+        body.
+      parameters:
+      - description: Movie ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/main.postCommentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.getCommentsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.errorResponse'
+      summary: Post comment on a movie
+      tags:
+      - Comments
+  /api/comments/{movie_id}:
+    get:
+      consumes:
+      - application/json
+      description: Fetch comments for a specific movie, provide no 'movie_id' if comments
+        for all movies needed
+      parameters:
+      - description: Movie ID
+        in: path
+        name: movie_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.getCommentsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.errorResponse'
+      summary: Get all comments for a movie.
+      tags:
+      - Comment
+  /api/films:
+    get:
+      consumes:
+      - application/json
+      description: Fetch list of movies and their details in chronological order.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.getFilmsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.errorResponse'
+      summary: Get films list
+      tags:
+      - Film
+swagger: "2.0"
