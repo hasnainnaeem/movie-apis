@@ -38,5 +38,5 @@ func main() {
 		log.Fatal("Error loading config file:", err)
 	}
 	// serve app
-	log.Fatal(http.ListenAndServe(":"+os.Getenv("$PORT), nil))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
 }
