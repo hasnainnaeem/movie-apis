@@ -7,7 +7,7 @@
 
 ## Setup and Running 
 - **Run app:** run `go run .` in the root directory. 
-- **Config variables:** `app.env* file contains all the config variables including `redis` and `postgres` credentials. The port variable is accessed through environment variable named `PATH`, use `config.AppPort` in `main.go` to access it from the config file.
+- **Config variables:** `app.env` file contains all the config variables including `redis` and `postgres` credentials. The port variable is accessed through environment variable named `PATH`, use `config.AppPort` in `main.go` to access it from the config file.
 
 ## Task Details
 Create a small set of rest API endpoints using Golang to do the following
