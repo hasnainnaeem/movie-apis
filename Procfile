@@ -1,1 +1,0 @@
-web: bin/movies-api
