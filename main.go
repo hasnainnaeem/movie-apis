@@ -30,13 +30,7 @@ func main() {
 	http.Handle("/docs/", httpSwagger.Handler(
 		httpSwagger.URL("/docs/swagger.json")))
 	http.HandleFunc("/docs/swagger.json", swaggerFiles)
-
-	var config Config
-	var err error
-	config, err = loadConfig(".")
-	if err != nil {
-		log.Fatal("Error loading config file:", err)
-	}
+	
 	// serve app
 	port := os.Getenv("PORT")
 	log.Fatal(http.ListenAndServe(":"+port, nil))
