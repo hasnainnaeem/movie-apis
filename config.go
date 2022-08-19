@@ -10,6 +10,6 @@ type Config struct {
 	DBName    string `mapstructure:"DB_NAME"`
 	DBSSLMode string `mapstructure:"SSL_MODE"`
 
-	RedisURL string `mapstructure:"REDIS_URL"`
-	redisPassword string `mapstructure:"REDIS_PASSWORD"`
+	RedisHost     string `mapstructure:"REDIS_URL"`
+	RedisPassword string `mapstructure:"REDIS_PASSWORD"`
 }

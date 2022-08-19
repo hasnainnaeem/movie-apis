@@ -6,7 +6,6 @@ import (
 	"github.com/go-redis/redis/v8"
 	"github.com/spf13/viper"
 	"log"
-	"net/url"
 )
 
 // loadConfig reads configuration from file or environment variables.
@@ -57,14 +56,10 @@ func getPostgresDB(config Config) (*sql.DB, error) {
 
 func getRedisClient(config Config) (*redis.Client, error) {
 	// redis
-	var redisUrl = config.RedisURL
-	parsedURL, _ := url.Parse(redisUrl)
-	redisPassword, _ := parsedURL.User.Password()
-	redisHost := parsedURL.Host
 
 	client := redis.NewClient(&redis.Options{
-		Addr:     redisHost,
-		Password: redisPassword,
+		Addr:     config.RedisHost,
+		Password: config.RedisPassword,
 		DB:       0,
 	})
 
