@@ -1,4 +1,4 @@
-# Go Assessment Task
+# Movie APIs
 - API endpoints to fetch movie details and to comment on movies. 
 - Details are fetched from `https://swapi.dev`and cached using `redis`. 
 - Comments are saved in postgres database.
