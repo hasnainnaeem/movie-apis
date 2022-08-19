@@ -5,7 +5,6 @@ import (
 	httpSwagger "github.com/swaggo/http-swagger"
 	"log"
 	"net/http"
-	"strconv"
 	"os"
 )
 
@@ -39,5 +38,6 @@ func main() {
 		log.Fatal("Error loading config file:", err)
 	}
 	// serve app
-	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
+	port := os.Getenv("PORT")
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
