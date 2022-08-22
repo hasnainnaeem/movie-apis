@@ -3,7 +3,7 @@
 - Details are fetched from `https://swapi.dev`and cached using `redis`. 
 - Comments are saved in postgres database.
 - **Demo link:** https://apis-for-movies.herokuapp.com/
-- **API endpoints and their details:** https://apis-for-movies.herokuapp.com/api/docs
+- **API endpoints and their details:** https://apis-for-movies.herokuapp.com/docs/
 
 ## Setup and Running 
 - **Run app:** run `go run .` in the root directory. 
